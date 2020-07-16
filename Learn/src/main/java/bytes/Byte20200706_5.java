@@ -3,9 +3,9 @@ package bytes;
 /**
  * @author jingqing
  */
+// todo 一说到回文子串就要想到扩展中心位!!!!!!s
 public class Byte20200706_5 {
 
-    // todo
 //    5. 最长回文子串
 //    给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
 //
@@ -18,7 +18,7 @@ public class Byte20200706_5 {
 //    输出: "bb"
 
     public static void main(String[] args) {
-        System.out.println(findStr("ab"));
+        System.out.println(longestPalindromeRight("cbbc"));
     }
 
     // 没有做出来。。。
@@ -29,7 +29,7 @@ public class Byte20200706_5 {
 
 
     // 思想:扩展中心位
-    public String longestPalindromeRight(String s) {
+    public static String longestPalindromeRight(String s) {
         if (s == null || s.length() < 1) {
             return "";
         }
@@ -38,8 +38,7 @@ public class Byte20200706_5 {
             int len1 = expandAroundCenter(s, i, i);
             int len2 = expandAroundCenter(s, i, i + 1);
             int len = Math.max(len1, len2);
-            // todo
-            if (len > end - start) {
+            if (len > end - start + 1) {
                 start = i - (len - 1) / 2;
                 end = i + len / 2;
             }
@@ -47,13 +46,13 @@ public class Byte20200706_5 {
         return s.substring(start, end + 1);
     }
 
-    private int expandAroundCenter(String s, int left, int right) {
+    private static  int expandAroundCenter(String s, int left, int right) {
         int L = left, R = right;
         while (L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
             L--;
             R++;
         }
-        return R - L - 1;
+        return R - L + 1 -2;
     }
 
 }
